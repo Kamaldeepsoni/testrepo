@@ -14,15 +14,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-
+  Build-Solution:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         dotnet-version: ['5.0']
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
       - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v1.7.2
         with:
@@ -33,3 +33,14 @@ jobs:
         run: dotnet build --configuration Release --no-restore ./Playground/Playground.csproj
       - name: Test
         run: dotnet test --no-restore --verbosity normal ./Playground/Playground.csproj
+
+  Execute-Linter:
+     runs-on: ubuntu-latest
+     
+     steps:
+       - name: Checkout Code
+         uses: actions/checkout@v2
+       - name: Run Super-linter
+         uses: github/super-linter@v3.17.1
+  
+    
