@@ -28,8 +28,8 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore ./Playground/Playground.csproj
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore ./Playground/Playground.csproj
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test --no-restore --verbosity normal ./Playground/Playground.csproj
