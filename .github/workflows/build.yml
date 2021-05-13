@@ -32,15 +32,10 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore ./Playground/Playground.csproj
       - name: Test
-        run: dotnet test --no-restore --verbosity normal ./Playground/Playground.csproj
-
-  Execute-Linter:
-     runs-on: ubuntu-latest
-     
-     steps:
-       - name: Checkout Code
-         uses: actions/checkout@v2
-       - name: Run Super-linter
-         uses: github/super-linter@v3.17.1
-  
+        run: dotnet test --no-restore --verbosity normal ./Playground/Playground.csproj      
+      - name: Run Super-linter
+        uses: github/super-linter@v3.17.1
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
